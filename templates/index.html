@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Research Paper Assistant</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', path='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- ==========================================
+         LEFT SIDEBAR
+    =========================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                ▣
+            </div>
+
+            <span>
+                Research Assistant
+            </span>
+
+        </div>
+
+
+        <button class="new-chat">
+
+            <span class="plus">
+                +
+            </span>
+
+            New chat
+
+        </button>
+
+
+        <div class="sidebar-section">
+
+            <p class="sidebar-title">
+                SOURCES
+            </p>
+
+
+            <!-- Upload area -->
+
+            <form
+                action="/upload"
+                method="POST"
+                enctype="multipart/form-data"
+                id="upload-form"
+            >
+
+                <label
+                    for="pdf-files"
+                    class="upload-box"
+                >
+
+                    <div class="upload-symbol">
+                        ⇧
+                    </div>
+
+                    <strong>
+                        Upload PDFs
+                    </strong>
+
+                    <span>
+                        Click or drop files here
+                    </span>
+
+                </label>
+
+
+                <input
+                    type="file"
+                    id="pdf-files"
+                    name="files"
+                    accept=".pdf"
+                    multiple
+                    hidden
+                >
+
+
+                <button
+                    type="submit"
+                    id="upload-submit"
+                    hidden
+                >
+                    Upload
+                </button>
+
+            </form>
+
+
+            <!-- Uploaded papers -->
+
+            {% if papers %}
+
+            <div class="source-list">
+
+                {% for paper in papers %}
+
+                <div class="source-card">
+
+                    <div class="pdf-icon">
+                        PDF
+                    </div>
+
+                    <div class="source-info">
+
+                        <strong>
+                            {{ paper.filename }}
+                        </strong>
+
+                        <span>
+                            {{ paper.pages }} pages
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <p class="empty-sources">
+                No papers uploaded yet. Add a PDF to
+                start asking questions grounded in it.
+            </p>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- Sidebar bottom -->
+
+        <div class="sidebar-bottom">
+
+            <div class="source-count">
+
+                {{ papers|length if papers else 0 }}
+                sources
+
+            </div>
+
+            <button class="theme-button">
+                Light
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ==========================================
+         MAIN CONTENT
+    =========================================== -->
+
+    <main class="main">
+
+
+        <!-- Hero -->
+
+        <section class="hero">
+
+            <div class="badge">
+                Research paper assistant
+            </div>
+
+
+            <h1>
+                Understand your
+                <em>research<br>papers.</em>
+            </h1>
+
+
+            <p>
+                Upload one or more PDFs and ask questions —
+                every answer stays grounded in what your
+                documents actually say.
+            </p>
+
+
+            <!-- Main upload button -->
+
+            <label
+                for="pdf-files"
+                class="main-upload"
+            >
+
+                <span class="upload-arrow">
+                    ⇧
+                </span>
+
+                Upload PDF files
+
+            </label>
+
+
+            <!-- Suggested questions -->
+
+            <div class="suggestions">
+
+                <button
+                    type="button"
+                    onclick="setQuestion('Summarize the main contribution')"
+                >
+                    Summarize the main contribution
+                </button>
+
+
+                <button
+                    type="button"
+                    onclick="setQuestion('What methodology was used?')"
+                >
+                    What methodology was used?
+                </button>
+
+
+                <button
+                    type="button"
+                    onclick="setQuestion('What are the key limitations?')"
+                >
+                    What are the key limitations?
+                </button>
+
+
+                <button
+                    type="button"
+                    onclick="setQuestion('List the main findings')"
+                >
+                    List the main findings
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================================
+             ANSWER
+        =========================================== -->
+
+        {% if answer %}
+
+        <section class="answer-container">
+
+            <div class="answer-label">
+                ANSWER
+            </div>
+
+            <div class="answer-box">
+
+                {{ answer }}
+
+            </div>
+
+
+            {% if sources %}
+
+            <div class="answer-sources">
+
+                <strong>
+                    Sources
+                </strong>
+
+                {% for source in sources %}
+
+                <span class="source-tag">
+
+                    {{ source.document }}
+                    · Page {{ source.page }}
+
+                </span>
+
+                {% endfor %}
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+        {% endif %}
+
+
+
+        <!-- ==========================================
+             ERRORS
+        =========================================== -->
+
+        {% if errors %}
+
+        <div class="error-box">
+
+            {% for error in errors %}
+
+            <p>
+                {{ error }}
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+
+
+        <!-- ==========================================
+             CHAT INPUT
+        =========================================== -->
+
+        <div class="chat-area">
+
+            <form
+                action="/ask"
+                method="POST"
+                class="chat-form"
+            >
+
+                <textarea
+                    name="question"
+                    id="question"
+                    placeholder="Ask anything about your uploaded papers..."
+                    rows="1"
+                    required
+                ></textarea>
+
+
+                <button
+                    type="submit"
+                    class="send-button"
+                    title="Ask question"
+                >
+                    ↑
+                </button>
+
+            </form>
+
+
+            <p class="disclaimer">
+                Answers are generated from your uploaded PDFs
+                and may be incomplete or wrong.
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+
+<script>
+
+    const pdfInput =
+        document.getElementById("pdf-files");
+
+    const uploadForm =
+        document.getElementById("upload-form");
+
+
+    /*
+     When user selects PDF files,
+     automatically submit the upload form.
+    */
+
+    pdfInput.addEventListener(
+        "change",
+        function () {
+
+            if (this.files.length > 0) {
+
+                uploadForm.submit();
+
+            }
+
+        }
+    );
+
+
+    /*
+     Suggested question buttons
+    */
+
+    function setQuestion(text) {
+
+        const question =
+            document.getElementById("question");
+
+        question.value = text;
+
+        question.focus();
+
+    }
+
+
+    /*
+     Auto-expand textarea
+    */
+
+    const textarea =
+        document.getElementById("question");
+
+    textarea.addEventListener(
+        "input",
+        function () {
+
+            this.style.height = "auto";
+
+            this.style.height =
+                this.scrollHeight + "px";
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

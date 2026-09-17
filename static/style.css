@@ -1,0 +1,835 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: #ffffff;
+    color: #1f2933;
+}
+
+
+/* ==========================================
+   APP LAYOUT
+========================================== */
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* ==========================================
+   SIDEBAR
+========================================== */
+
+.sidebar {
+    width: 372px;
+    min-height: 100vh;
+
+    background: #f8f8f6;
+
+    border-right: 1px solid #e2e2de;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 32px 16px 18px;
+}
+
+
+/* Brand */
+
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 5px 2px 22px;
+
+    font-size: 21px;
+    font-weight: 600;
+
+    color: #111827;
+}
+
+
+.brand-icon {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 10px;
+
+    background: #087c66;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+}
+
+
+/* New Chat */
+
+.new-chat {
+    width: 100%;
+
+    height: 51px;
+
+    border: 1px solid #d8d8d3;
+
+    border-radius: 17px;
+
+    background: #ffffff;
+
+    color: #1f2933;
+
+    font-size: 19px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 0 19px;
+
+    cursor: pointer;
+}
+
+
+.new-chat:hover {
+    background: #f2f2ef;
+}
+
+
+.plus {
+    font-size: 27px;
+    font-weight: 300;
+}
+
+
+/* Sidebar section */
+
+.sidebar-section {
+    margin-top: 30px;
+}
+
+
+.sidebar-title {
+    color: #77838b;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    margin: 0 4px 13px;
+}
+
+
+/* ==========================================
+   UPLOAD BOX
+========================================== */
+
+.upload-box {
+    height: 150px;
+
+    border: 2px dashed #d9d9d3;
+
+    border-radius: 18px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    cursor: pointer;
+
+    background: #fafaf8;
+}
+
+
+.upload-box:hover {
+    border-color: #087c66;
+    background: #f3faf8;
+}
+
+
+.upload-symbol {
+    font-size: 31px;
+
+    color: #707b82;
+
+    margin-bottom: 2px;
+}
+
+
+.upload-box strong {
+    font-size: 17px;
+
+    color: #111827;
+
+    font-weight: 500;
+}
+
+
+.upload-box span {
+    font-size: 15px;
+
+    color: #9a9a96;
+}
+
+
+/* ==========================================
+   SOURCES
+========================================== */
+
+.empty-sources {
+    color: #7c8991;
+
+    font-size: 16px;
+
+    line-height: 1.55;
+
+    padding: 37px 6px 0;
+}
+
+
+.source-list {
+    margin-top: 18px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.source-card {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 10px;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    border: 1px solid #e4e4df;
+}
+
+
+.pdf-icon {
+    width: 39px;
+    height: 39px;
+
+    border-radius: 9px;
+
+    background: #e8f5f1;
+
+    color: #087c66;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+.source-info {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.source-info strong {
+    font-size: 13px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.source-info span {
+    font-size: 12px;
+
+    color: #89939a;
+}
+
+
+/* Sidebar bottom */
+
+.sidebar-bottom {
+    margin-top: auto;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #deded9;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.source-count {
+    color: #7d8990;
+
+    font-size: 15px;
+}
+
+
+.theme-button {
+    border: 1px solid #d7d7d2;
+
+    background: #ffffff;
+
+    border-radius: 10px;
+
+    padding: 8px 16px;
+
+    color: #667178;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   MAIN
+========================================== */
+
+.main {
+    flex: 1;
+
+    min-width: 0;
+
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    padding: 78px 40px 150px;
+}
+
+
+/* ==========================================
+   HERO
+========================================== */
+
+.hero {
+    width: 100%;
+
+    max-width: 850px;
+
+    text-align: center;
+}
+
+
+.badge {
+    display: inline-block;
+
+    padding: 9px 17px;
+
+    border-radius: 30px;
+
+    background: #e1f4ee;
+
+    color: #087c66;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    margin-bottom: 28px;
+}
+
+
+.hero h1 {
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(46px, 5vw, 68px);
+
+    line-height: 1.05;
+
+    font-weight: 500;
+
+    letter-spacing: -2px;
+
+    color: #20201f;
+}
+
+
+.hero h1 em {
+    color: #087c66;
+
+    font-style: italic;
+}
+
+
+.hero p {
+    max-width: 720px;
+
+    margin: 27px auto 0;
+
+    color: #38454d;
+
+    font-size: 19px;
+
+    line-height: 1.65;
+}
+
+
+/* ==========================================
+   MAIN UPLOAD BUTTON
+========================================== */
+
+.main-upload {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 31px;
+
+    padding: 16px 28px;
+
+    background: #087c66;
+
+    color: white;
+
+    border-radius: 13px;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.main-upload:hover {
+    background: #066b58;
+
+    transform: translateY(-1px);
+}
+
+
+.upload-arrow {
+    font-size: 22px;
+}
+
+
+/* ==========================================
+   SUGGESTIONS
+========================================== */
+
+.suggestions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 42px;
+}
+
+
+.suggestions button {
+    border: 1px solid #deded9;
+
+    background: #ffffff;
+
+    color: #4e5960;
+
+    border-radius: 25px;
+
+    padding: 11px 19px;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.suggestions button:hover {
+    border-color: #087c66;
+
+    color: #087c66;
+
+    background: #f4faf8;
+}
+
+
+/* ==========================================
+   ANSWER
+========================================== */
+
+.answer-container {
+    width: 100%;
+
+    max-width: 850px;
+
+    margin-top: 55px;
+
+    text-align: left;
+}
+
+
+.answer-label {
+    color: #087c66;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 10px;
+}
+
+
+.answer-box {
+    background: #f7f7f4;
+
+    border: 1px solid #e4e4df;
+
+    border-radius: 18px;
+
+    padding: 24px;
+
+    color: #30383d;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    white-space: pre-wrap;
+}
+
+
+.answer-sources {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 15px;
+
+    color: #68757c;
+
+    font-size: 14px;
+}
+
+
+.source-tag {
+    padding: 7px 11px;
+
+    border-radius: 9px;
+
+    background: #edf7f4;
+
+    color: #087c66;
+}
+
+
+/* ==========================================
+   ERRORS
+========================================== */
+
+.error-box {
+    width: 100%;
+
+    max-width: 850px;
+
+    margin-top: 30px;
+
+    padding: 17px 20px;
+
+    border-radius: 13px;
+
+    background: #fff5f3;
+
+    border: 1px solid #efd5cf;
+
+    color: #a34535;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   CHAT AREA
+========================================== */
+
+.chat-area {
+    position: fixed;
+
+    bottom: 25px;
+
+    left: calc(372px + 50%);
+
+    transform: translateX(-50%);
+
+    width: calc(100% - 450px);
+
+    max-width: 1000px;
+
+    text-align: center;
+}
+
+
+.chat-form {
+    min-height: 78px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 10px 12px 10px 28px;
+
+    background: #f5f5f3;
+
+    border: 1px solid #deded9;
+
+    border-radius: 27px;
+
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+
+.chat-form textarea {
+    flex: 1;
+
+    resize: none;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #263238;
+
+    font-family: inherit;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+
+    max-height: 120px;
+}
+
+
+.chat-form textarea::placeholder {
+    color: #98a0a5;
+}
+
+
+.send-button {
+    width: 49px;
+
+    height: 49px;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #087c66;
+
+    color: white;
+
+    font-size: 28px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition: 0.2s;
+}
+
+
+.send-button:hover {
+    background: #066b58;
+
+    transform: scale(1.04);
+}
+
+
+.disclaimer {
+    margin-top: 10px;
+
+    color: #89939a;
+
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 280px;
+    }
+
+
+    .chat-area {
+        left: calc(280px + 50%);
+
+        width: calc(100% - 340px);
+    }
+
+
+    .hero h1 {
+        font-size: 48px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .app {
+        display: block;
+    }
+
+
+    .sidebar {
+        width: 100%;
+
+        min-height: auto;
+
+        border-right: none;
+
+        border-bottom: 1px solid #e2e2de;
+
+        padding: 18px;
+    }
+
+
+    .sidebar-section {
+        display: none;
+    }
+
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+
+    .new-chat {
+        display: none;
+    }
+
+
+    .main {
+        padding: 50px 20px 150px;
+    }
+
+
+    .hero h1 {
+        font-size: 43px;
+
+        letter-spacing: -1px;
+    }
+
+
+    .hero p {
+        font-size: 16px;
+    }
+
+
+    .suggestions {
+        margin-top: 30px;
+    }
+
+
+    .chat-area {
+        left: 0;
+
+        transform: none;
+
+        width: 100%;
+
+        padding: 0 15px;
+
+        bottom: 15px;
+    }
+
+
+    .chat-form {
+        min-height: 65px;
+
+        padding-left: 18px;
+
+        border-radius: 22px;
+    }
+
+
+    .chat-form textarea {
+        font-size: 16px;
+    }
+
+}
