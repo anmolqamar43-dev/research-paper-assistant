@@ -12,8 +12,10 @@ from google import genai
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-VECTOR_DIR = BASE_DIR / "vector_data"
-VECTOR_DIR.mkdir(exist_ok=True)
+# Vercel serverless filesystem
+# /tmp is writable but temporary
+VECTOR_DIR = Path("/tmp/vector_data")
+VECTOR_DIR.mkdir(parents=True, exist_ok=True)
 
 INDEX_FILE = VECTOR_DIR / "research_papers.index"
 METADATA_FILE = VECTOR_DIR / "metadata.json"

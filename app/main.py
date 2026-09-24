@@ -56,11 +56,14 @@ app = FastAPI(
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-UPLOAD_DIR = BASE_DIR / "uploads"
+# Vercel serverless filesystem:
+# only /tmp is writable
+UPLOAD_DIR = Path("/tmp/uploads")
+
 TEMPLATE_DIR = BASE_DIR / "templates"
 STATIC_DIR = BASE_DIR / "static"
 
-UPLOAD_DIR.mkdir(exist_ok=True)
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 
 # --------------------------------------------------
