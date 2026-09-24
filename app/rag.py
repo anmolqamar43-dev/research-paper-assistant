@@ -1,5 +1,5 @@
 from pathlib import Path
-
+import time
 import pdfplumber
 from pypdf import PdfReader
 
@@ -181,10 +181,48 @@ User question:
 Give a clear and concise answer.
 """
 
-    response = client.models.generate_content(
-        model="gemini-3.6-flash",
-        contents=prompt
-    )
+    response = None
+    last_error = None
+
+    models = [
+        "gemini-3.8-flash",
+        "gemini-3.6-flash"
+    ]
+
+    for model_name in models:
+
+        for attempt in range(3):
+
+            try:
+
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=prompt
+                )
+
+                break
+
+            except Exception as error:
+
+                last_error = error
+
+                if "503" in str(error) or "UNAVAILABLE" in str(error):
+
+                    if attempt < 2:
+                        import time
+                        time.sleep(2 ** attempt)
+                        continue
+
+                break
+
+        if response is not None:
+            break
+
+    if response is None:
+        raise RuntimeError(
+            f"Gemini model temporarily unavailable. "
+            f"Please try again shortly. Details: {last_error}"
+        )
 
     sources = []
 
